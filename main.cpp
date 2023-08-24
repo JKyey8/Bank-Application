@@ -16,7 +16,11 @@ int usertype ;
 string userFirstName;
 string userLastName;
 
+void userInteraction(string user){
 
+cout << user;
+
+};
 
 
 
@@ -73,8 +77,9 @@ while((x= readdir(directory)) != NULL){
 
 if( userFirstName + " " + userLastName + ".txt" == x->d_name){
 
-
+ string user = userFirstName + " " + userLastName ;
  result = true;
+userInteraction(user);
 
 break;
 
@@ -91,7 +96,7 @@ closedir(directory);
 
 if(result){
 
-    cout << "I found it!";
+    
 } else {
 
 cout << "\nSorry, your account is not in our system. Please make an account. \n" ;
