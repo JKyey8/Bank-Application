@@ -16,13 +16,40 @@ int usertype ;
 string userFirstName;
 string userLastName;
 
-void userInteraction(string user){
 
-cout << user;
+
+void userInteractions ( string user){
+string userFile = "./userList/" + user + ".txt";
+int bankAction;
+string line;
+int current_line = 0;
+ifstream dataFile;
+dataFile.open(userFile);
+
+if (dataFile.fail()){
+cout << "can not open file";
+return;
+}
+
+cout << "What would you like to do today? \n" ;
+cin >> bankAction;
+if (bankAction = 2){
+
+while (!dataFile.eof()){
+current_line++;
+getline(dataFile, line);
+if (current_line == bankAction ){
+  
+cout << line;
+break;
+} 
+}
+
+}
+
+
 
 };
-
-
 
 
 void getUserType(int userTypeAnswer) {
@@ -34,8 +61,7 @@ mkdir("./userList");
 if(userTypeAnswer == 1){
 
 
-
-
+string personalID;
 
 
 cout << "Enter your First name: \n";
@@ -43,11 +69,19 @@ cin >> userFirstName;
 cout << "Enter your Last name: \n";
 cin >> userLastName;
 
+string userID = userFirstName + " " + userLastName ;
 
 
-
+int checking = 10;
+int savings = 15;
 
 ofstream Users("./userList/" + userFirstName + " " + userLastName + ".txt");
+Users << userID << endl ;
+Users << checking << endl  ;
+Users << savings  ;
+
+
+
 
 
 Users.close();
@@ -79,7 +113,7 @@ if( userFirstName + " " + userLastName + ".txt" == x->d_name){
 
  string user = userFirstName + " " + userLastName ;
  result = true;
-userInteraction(user);
+ userInteractions(user);
 
 break;
 
@@ -95,7 +129,7 @@ closedir(directory);
 
 
 if(result){
-
+ 
     
 } else {
 
