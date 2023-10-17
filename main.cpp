@@ -11,8 +11,6 @@
 using namespace std;
 using std::filesystem::directory_iterator;
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, 
- LPSTR lpCmdLine, int nCmdShow) ;
 
 int usertype ;
 string userFirstName;
@@ -22,9 +20,6 @@ string userLastName;
 
 void userInteractions ( string user){
 
-
- MessageBox(NULL, "Goodbye, cruel world!", "Note", MB_OK); 
- return; 
  string userFile = "./userList/" + user + ".txt";
 int bankAction;
 string line;
@@ -38,18 +33,25 @@ return;
 }
 
 cout << "What would you like to do today? \n" ;
+cout << "1.   Checking \n" ;
+cout << "2    Savings \n" ;
 cin >> bankAction;
-if (bankAction = 2){
+
 
 while (!dataFile.eof()){
+
+
 current_line++;
+
+
 getline(dataFile, line);
 if (current_line == bankAction ){
   
 cout << line;
 break;
 } 
-}
+
+
 
 }
 
@@ -82,9 +84,10 @@ int checking = 10;
 int savings = 15;
 
 ofstream Users("./userList/" + userFirstName + " " + userLastName + ".txt");
-Users << userID << endl ;
+
 Users << checking << endl  ;
 Users << savings  ;
+Users << userID << endl ;
 
 
 
@@ -92,8 +95,11 @@ Users << savings  ;
 
 Users.close();
 
-cout << "Your account has been created!";
+cout << "Your account has been created! \n";
 
+ string user = userFirstName + " " + userLastName ;
+ 
+ userInteractions(user);
 
 } else if(userTypeAnswer == 2){
 
@@ -101,7 +107,7 @@ DIR *directory;
 struct dirent *x;
 
 
-cout << " existing user! \n\n";
+cout << " existing user! \n";
 
 cout << "Enter your First name: \n";
 cin >> userFirstName;
@@ -143,6 +149,7 @@ cout << "\nSorry, your account is not in our system. Please make an account. \n"
 
 
 
+return;
 }
 /*
 for( const auto & file: directory_iterator("./userList")){
@@ -238,7 +245,7 @@ main();
 } else if (usertype== 2){
     getUserType(2);
 
-
+main();
 } else {
 
 cout << "Please enter a valid number and try again! \n\n";
