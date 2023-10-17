@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
+#include <windows.h>
 #include <direct.h>
 #include<dirent.h>
 #include <cmath>
@@ -10,7 +11,8 @@
 using namespace std;
 using std::filesystem::directory_iterator;
 
-
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, 
+ LPSTR lpCmdLine, int nCmdShow) ;
 
 int usertype ;
 string userFirstName;
@@ -19,7 +21,11 @@ string userLastName;
 
 
 void userInteractions ( string user){
-string userFile = "./userList/" + user + ".txt";
+
+
+ MessageBox(NULL, "Goodbye, cruel world!", "Note", MB_OK); 
+ return; 
+ string userFile = "./userList/" + user + ".txt";
 int bankAction;
 string line;
 int current_line = 0;
