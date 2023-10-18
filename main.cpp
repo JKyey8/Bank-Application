@@ -130,29 +130,34 @@ bool result = false;
 
 
 ifstream dataFile;
-int current_line = 0;
+
 string line;
+string userData[6];
+int arraryPlace = 0;
 
 string userFile = "./userList/A" + to_string(personalID) + ".txt";
 dataFile.open(userFile);
-if (!dataFile.fail()){
-
-
-
-current_line++;
-
-
+while (!dataFile.fail()){
 getline(dataFile, line);
-if (current_line == 1 ){
+arraryPlace++;
+userData[arraryPlace] = line;
+
+}
+
+cout << userData[2];
+
+
+
+if (userData[2] == to_string(userPin) ){
   
-cout << line;
+cout << "Correct pin";
 
-} 
-
-} else {
+}  else {
 
 
-    cout << "No this didnt work :()";
+cout << "Incorrect Credentials \n Logging Out.";
+
+
 }
 /*
 if((directory = opendir("./userList/A")) != NULL){
@@ -266,6 +271,8 @@ cout << " \n sorry we couldnt find your login information";
 
 
 */
+
+
 
 
 
