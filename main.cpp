@@ -15,7 +15,8 @@ using std::filesystem::directory_iterator;
 int usertype ;
 string userFirstName;
 string userLastName;
-
+int userPin;
+int personalID;
 
 
 void userInteractions ( string user){
@@ -69,22 +70,30 @@ mkdir("./userList");
 if(userTypeAnswer == 1){
 
 
-string personalID;
+
 
 
 cout << "Enter your First name: \n";
 cin >> userFirstName;
 cout << "Enter your Last name: \n";
 cin >> userLastName;
+cout << "Please create a 4-digit Personal Pin";
+cin >> userPin;
 
 string userID = userFirstName + " " + userLastName ;
 
-
+srand((unsigned) time(NULL));
 int checking = 10;
 int savings = 15;
 
-ofstream Users("./userList/" + userFirstName + " " + userLastName + ".txt");
 
+int personalID = 10000000 + (rand() % 90000000 );
+
+
+ofstream Users("./userList/A" + to_string(personalID) + ".txt");
+
+Users << personalID << endl ;
+Users << userPin << endl ;
 Users << checking << endl  ;
 Users << savings  ;
 Users << userID << endl ;
@@ -93,9 +102,12 @@ Users << userID << endl ;
 
 
 
+
+
 Users.close();
 
 cout << "Your account has been created! \n";
+cout << "Your personal ID is " + to_string(personalID) + ". Plese keep this safe as you will use it to login.";
 
  string user = userFirstName + " " + userLastName ;
  
@@ -109,19 +121,49 @@ struct dirent *x;
 
 cout << " existing user! \n";
 
-cout << "Enter your First name: \n";
-cin >> userFirstName;
-cout << "Enter your Last name: \n";
-cin >> userLastName;
+cout << "Enter your Personal ID \n";
+cin >> personalID;
+cout << "Enter your Personal Pin \n";
+cin >> userPin;
 
 bool result = false;
 
-if((directory = opendir("./userList")) != NULL){
+
+ifstream dataFile;
+int current_line = 0;
+string line;
+
+string userFile = "./userList/A" + to_string(personalID) + ".txt";
+dataFile.open(userFile);
+if (!dataFile.fail()){
+
+
+
+current_line++;
+
+
+getline(dataFile, line);
+if (current_line == 1 ){
+  
+cout << line;
+
+} 
+
+} else {
+
+
+    cout << "No this didnt work :()";
+}
+/*
+if((directory = opendir("./userList/A")) != NULL){
 
 
 while((x= readdir(directory)) != NULL){
 
-if( userFirstName + " " + userLastName + ".txt" == x->d_name){
+
+if( "A" + to_string(personalID) + ".txt" == x->d_name){
+
+cout << "Hip Hip";
 
  string user = userFirstName + " " + userLastName ;
  result = true;
@@ -140,6 +182,7 @@ closedir(directory);
 }
 
 
+
 if(result){
  
     
@@ -151,6 +194,9 @@ cout << "\nSorry, your account is not in our system. Please make an account. \n"
 
 return;
 }
+*/
+
+
 /*
 for( const auto & file: directory_iterator("./userList")){
 
