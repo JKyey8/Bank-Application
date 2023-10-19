@@ -38,6 +38,7 @@ return;
 cout << "What would you like to do today? \n" ;
 cout << "1.   Checking \n" ;
 cout << "2    Savings \n" ;
+cout << "3    deposit \n" ;
 cin >> bankAction;
 
 
@@ -134,24 +135,30 @@ bool result = false;
 ifstream dataFile;
 
 string line;
-string userData[6];
-int arraryPlace = 0;
 
+int current_line = 0;
 string userFile = "./userList/" + to_string(personalID) + ".txt";
 dataFile.open(userFile);
 while (!dataFile.fail()){
+
+    current_line++;
 getline(dataFile, line);
-if (current_line == 1 ){
+if (current_line == 2 ){
   
-cout << line;
+if(line == to_string(userPin)){
 
-} 
-
+cout << "correct pin entered \n \n ";
+userInteractions(personalID);
+ 
 } else {
 
 cout << "Wrong thing bozo";
 
-    cout << "No this didnt work :()";
+  
+}
+} 
+
+ 
 }
 /*
 if((directory = opendir("./userList/A")) != NULL){
