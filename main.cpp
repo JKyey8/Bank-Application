@@ -19,9 +19,11 @@ int userPin;
 int personalID;
 
 
-void userInteractions ( string user){
+void userInteractions (int personalID ){
 
- string userFile = "./userList/" + user + ".txt";
+   
+
+ string userFile = "./userList/" + to_string(personalID) + ".txt";
 int bankAction;
 string line;
 int current_line = 0;
@@ -77,7 +79,7 @@ cout << "Enter your First name: \n";
 cin >> userFirstName;
 cout << "Enter your Last name: \n";
 cin >> userLastName;
-cout << "Please create a 4-digit Personal Pin";
+cout << "Please create a 4-digit Personal Pin \n";
 cin >> userPin;
 
 string userID = userFirstName + " " + userLastName ;
@@ -90,7 +92,7 @@ int savings = 15;
 int personalID = 10000000 + (rand() % 90000000 );
 
 
-ofstream Users("./userList/A" + to_string(personalID) + ".txt");
+ofstream Users("./userList/" + to_string(personalID) + ".txt");
 
 Users << personalID << endl ;
 Users << userPin << endl ;
@@ -111,7 +113,7 @@ cout << "Your personal ID is " + to_string(personalID) + ". Plese keep this safe
 
  string user = userFirstName + " " + userLastName ;
  
- userInteractions(user);
+ userInteractions(personalID);
 
 } else if(userTypeAnswer == 2){
 
@@ -133,9 +135,9 @@ ifstream dataFile;
 int current_line = 0;
 string line;
 
-string userFile = "./userList/A" + to_string(personalID) + ".txt";
+string userFile = "./userList/" + to_string(personalID) + ".txt";
 dataFile.open(userFile);
-if (!dataFile.fail()){
+while (!dataFile.fail()){
 
 
 
@@ -143,17 +145,20 @@ current_line++;
 
 
 getline(dataFile, line);
-if (current_line == 1 ){
+if (current_line == 2 ){
   
-cout << line;
-
-} 
+if(line == to_string(userPin)){
+cout << "correct pin enteredv\n \n";
+userInteractions(personalID);
 
 } else {
 
+cout << "Wrong thing bozo";
 
-    cout << "No this didnt work :()";
 }
+} 
+
+} 
 /*
 if((directory = opendir("./userList/A")) != NULL){
 
